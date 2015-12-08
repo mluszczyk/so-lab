@@ -42,8 +42,10 @@ int main() {
 	int shmid = shmget(IPC_PRIVATE, 100, 0700);
 	SYSCHK(shmid != -1);
 	void *shm = shmat(shmid, 0, 0);
+    SYSCHK(shm != (void*)-1);
+    SYSCHK(shmctl(shmid, IPC_RMID, 0) == 0);
 	sem_t *sem = (sem_t *) shm;
-	SYSCHK(sem_init(sem, IPC_PRIVATE, 1) == 0);
+	SYSCHK(sem_init(sem, 1, 1) == 0);
 
     int i;
     for(i = 0; i < 5; i++) {
