@@ -41,7 +41,8 @@ void sekcja_krytyczna(int k) {
 int main() {
 	int shmid = shmget(IPC_PRIVATE, 100, 0700);
 	SYSCHK(shmid != -1);
-	sem_t *sem = (sem_t*)shmid;
+	void *shm = shmat(shmid, 0, 0);
+	sem_t *sem = (sem_t *) shm;
 	SYSCHK(sem_init(sem, IPC_PRIVATE, 1) == 0);
 
     int i;
