@@ -14,6 +14,7 @@ char napis[200];
 void *czytelnik(void *arg) {
 	while (true) {
 		czytelnik_chce_wejsc();
+		// usleep(100);
 		printf("%s\n", napis);
 		czytelnik_wychodzi();
 	}
